@@ -1,3 +1,14 @@
+var webstoreApp = angular.module('webstoreApp', ['ui.bootstrap', 'ngRoute']);
+
+
+webstoreApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider)
+{
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
+	});
+}]);
+
 $(document).ready(function(){
 	if ($("a.zoom").length > 0) {
 		$("a.zoom").fancybox({

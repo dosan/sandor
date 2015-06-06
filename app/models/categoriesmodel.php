@@ -53,39 +53,6 @@ class CategoriesModel extends MainModel{
 		return $this->getArrayResult($query);
 	}
 	/**
-	 * Получить данные категории по id
-	 * 
-	 * @param integer $cat_id ID категории
-	 * @return array массив - строка категории 
-	 */
-	public function getCategoryRecordsById($cat_id){
-		$sql = 
-			"SELECT
-				*
-			FROM
-				`shop_categories`
-			WHERE
-				cat_id = '{$cat_id}'";
-		$query =  $this->querySqlWithTryCatch($sql);
-		$categories = $query->fetch(PDO::FETCH_ASSOC);
-		return $categories;
-	}
-
-	/**
-	 * Получить продукты для категории $cat_id
-	 * 
-	 * @param integer $cat_id ID категории
-	 * @return array массив продуктов 
-	*/
-	public function getProductsByCat($cat_id){
-		$sql =  "SELECT *
-			FROM `products`
-			WHERE
-				cat_id = '{$cat_id}'";
-		$query =  $this->querySqlWithTryCatch($sql);
-		return $this->getArrayResult($query);
-	}
-	/**
 	* get all main categories
 	*
 	* @return array data catogries
@@ -121,7 +88,7 @@ class CategoriesModel extends MainModel{
 	* @return array categories
 	*/
 	public function getAllCategories(){
-			$sql = "SELECT *
+			$sql = "SELECT cat_name, cat_id
 			FROM shop_categories
 			ORDER BY parent_id ASC";
 
@@ -151,5 +118,21 @@ class CategoriesModel extends MainModel{
 		return $result;
 	}
 
+	public function getWithParentCategory($where){
 
+		$sql = "SELECT
+				c.cat_id,
+				c.cat_name,
+				c.parent_id,
+				p.cat_name AS parent_cat_name
+			FROM
+				`shop_categories` AS p
+			INNER JOIN `shop_categories` AS c
+			ON p.cat_id = c.parent_id";
+
+		$sql .= $where ? ' WHERE p.cat_id = '.$where.' OR c.cat_id = '.$where : '';
+		
+		$query =  $this->db->query($sql);
+		return $query->fetchall(PDO::FETCH_ASSOC);
+	}
 }//endclass

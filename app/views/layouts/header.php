@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact secure</title>    
+	<title>Contact secure</title>
+	<base href="">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS_PATH ?>core.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS_PATH ?>style.css" type="text/css">
-	<link rel="stylesheet" href="<?php echo JS_PATH ?>uploadify/uploadify.css" type="text/css">
-	<?php echo isset($hd_script) ? $hd_script : NULL ?>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>jquery.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular-route.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>fancybox/jquery.fancybox.js"></script>
+		<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>application.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -15,7 +21,6 @@
 				<a class="navbar-brand" href="/">Web Store</a>
 				<a class="navbar-brand" href="<?php echo URL ?>gallery">Gallery</a>
 				<a class="navbar-brand" href="<?php echo URL ?>post">Posts</a>
-				<a class="navbar-brand" href="<?php echo URL ?>contact">Contact</a>
 				<a class="navbar-brand" href="<?php echo URL ?>admin">Admin</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -32,5 +37,4 @@
 		</div>
 	</nav>
 	<div class="container">
-	<div class="err"></div>
-	<div class="row">	
+	<div class="row" ng-app="webstoreApp">

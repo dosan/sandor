@@ -116,9 +116,6 @@ table.tbl_repeat th{
 	margin-top: 5px;
 	text-align: center;
 }
-.selectContainer{
-	margin-top: 8px;
-}
 .errmessage{
 	padding: 6px 12px;
 	margin-bottom: 15px;
@@ -295,13 +292,6 @@ label,.warning{
 	
 }
 
-
-#wrapper {
-	max-width:500px;
-	width:95%;
-	margin:0 auto;
-	position:relative;
-}
 a.button:hover {
 	text-decoration: none;
 	color: #333;
@@ -318,66 +308,5 @@ a.button {
 	margin:0 0 5px;
 	padding:10px;
 	border-radius:5px;
-}
-#formContact {
-	text-shadow:0 1px 0 #FFF;
-	border-radius:4px;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	background:#F9F9F9;
-	padding:25px;
-}
-#formContact label {
-	cursor:pointer;
-	color:#444;
-	display:block;
-	margin:5px 0;
-	font-weight:900;
-}
-#formContact input,
-#formContact textarea {
-	width:100%;
-	box-shadow:inset 0 1px 2px #DDD, 0 1px 0 #FFF;
-	-webkit-box-shadow:inset 0 1px 2px #DDD, 0 1px 0 #FFF;
-	-moz-box-shadow:inset 0 1px 2px #DDD, 0 1px 0 #FFF;
-	border:1px solid #CCC;
-	background:#FFF;
-	margin:0 0 5px;
-	padding:10px;
-	border-radius:5px;
-}
-#formContact textarea {
-	height:100px;
-	max-width:100%;
-}
-
-select.contact{
-	width:100%;
-	height: 40px;
-	padding-left: 5px;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	border-radius:4px;
-	-webkit-box-shadow: 0 2px 0 #ddd, 0 -1px #fff inset;
-	-moz-box-shadow: 0 2px 0 #ddd, 0 -1px #fff inset;
-	box-shadow: 0 2px 0 #ddd, 0 -1px #fff inset;
-	border:none;
-	outline:none;
-	display: inline-block;
-	-webkit-appearance:none;
-	-moz-appearance:none;
-	appearance:none;
-	cursor:pointer;
-}
-
-div.uploadItem a {
-	position:relative;
-}
-
-div.uploadItem span:hover  {
-	display: block;
-	postion:absolute;
-	bottom:-50px;
-	cursor: pointer;
 }
 

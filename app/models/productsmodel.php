@@ -7,11 +7,14 @@ class ProductsModel  extends MainModel{
 	 * @param integer $cat_id ID категории
 	 * @return array массив продуктов 
 	*/
-	public function getProductsByCat($cat_id){
+	public function getProductsByCat($cat_id, $limit = null){
 		$sql =  "SELECT *
 			FROM `products`
 			WHERE
 				cat_id = '{$cat_id}'";
+		if ($limit) {
+			$sql .= " LIMIT {$limit}";
+		}
 		$query =  $this->querySqlWithTryCatch($sql);
 		return $this->getArrayResult($query);
 	}

@@ -1,44 +1,35 @@
 <?php
 
-
 class Category extends Controller
 {
-	/**
-	 * @var array $child_cats data of children Categories
-	 */
-	public $child_cats = null;
-	/**
-	 * @var array $products data of products
-	 */
-	public $products = null;
-	/**
-	 * @var array $cat_data data of the category
-	 */
-	public $cat_data = null;
 
-	public function index()
-	{
-		$prudcts_model = $this->model('ProductsModel');
-		$this->products = $prudcts_model->getLastProducts(20);
-		$this->loadViewTemplFolderTemplName('home', 'index.php');
+	public function index(){
+		$this->loadViewTemplFolderTemplName('category', 'index.php');
 	}
 
-	/**
-	* функция возвращает содержание категории, если это родительския категория то возвращает ее дочерние категории
-	* 
-	* @param $cat_id integer index category id
-	**/
 	public function getId($cat_id){
-		// categories_model(CategoryModel) declared in libs/controller.php because it for all pages
-		$this->cat_data = $this->categories_model->getCategoryRecordsById($cat_id);
-		// если главная категория то показываем дочернии категории,
-		// иначе показывает товар
-		if ($this->cat_data['parent_id'] == 0) {
-			$this->child_cats = $this->categories_model->getChildrenCategories($cat_id);
-		}else{
-			$this->products = $this->categories_model->getProductsByCat($cat_id);
-		}
-		$this->loadViewTemplFolderTemplName('category','getid.php');
+
+		$this->loadViewTemplFolderTemplName('category','index.php');
 	}
 
+	public function getCategoriesWithProducts($cat_id = null)
+	{
+		$products_model = $this->model('ProductsModel');
+
+		$result = array();
+
+		$data = $this->categories_model->getWithParentCategory($cat_id);
+		foreach ($data as $key => $value) {
+			$limit = $value['cat_id'] == $cat_id ? 6 : 3;
+			if ($limit) {
+				$value['products'] = $products_model->getProductsByCat($value['cat_id'], $limit);
+			}
+			$result[] = $value;
+		}
+
+		echo json_encode($result);
+	}
+	public function getCategories(){
+		echo  json_encode($this->categories_model->getAllMainCatsWithChildren());
+	}
 }
