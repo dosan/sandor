@@ -2,6 +2,64 @@
 
 
 class CategoriesModel extends MainModel{
+
+	public function getProducts($parent_url = null, $category_url = null){
+		$sql = "SELECT p.product_name, p.product_id, p.product_price, p.name_id, p.product_description, p.product_image, p.product_status,
+						c.cat_name, c.cat_url, pc.cat_name AS parent_cat_name, pc.cat_url AS parent_cat_url
+					FROM products AS p
+				LEFT JOIN shop_categories AS c ON p.cat_id = c.cat_id
+				LEFT JOIN shop_categories AS pc ON c.parent_id = pc.cat_id";
+		if ($parent_url) {
+			$sql .= " WHERE pc.cat_url = '{$parent_url}'";
+		}
+		if ($category_url) {
+			$sql .= " AND c.cat_url = '{$category_url}'";
+		}
+		$query =  $this->db->query($sql);
+		return $this->getArrayResult($query);
+	}
+/*	public function getPath($parent_url = null, $category_url = null){
+		// change the product_id to product_url to in get request to use product_url
+		$sql = "SELECT p.prdouct_name, p.product_id, c.cat_name, c.cat_url, pc.cat_name as parent_cat_name, pc.cat_url as parent_cat_url
+				FROM products AS p
+				LEFT JOIN shop_categories AS c ON c.cat_id = p.cat_id
+				LEFT JOIN category AS pc ON pc.cat_id = c.parent_id";
+		if ($parent_url) {
+			$sql .= " WHERE pc.cat_url = '{$parent_url}'";
+		}
+		if ($category_url) {
+			$sql .= " AND c.cat_url = '{$category_url}'";
+		}
+		$query =  $this->db->query($sql);
+		return $this->getArrayResult($query);
+	}*/
+
+	public function getChildCategories($parent_url){
+		$sql = "SELECT
+			t1.cat_name AS cat_name,
+			t1.cat_id
+			FROM shop_categories AS t1
+			LEFT JOIN shop_categories AS t2 ON t1.parent_id = t2.cat_id
+			WHERE t2.cat_url = '{$parent_url}'
+		";
+		$query =  $this->db->query($sql);
+		return $this->getArrayResult($query);
+	}
+
+	public function getCategories(){
+		$sql = "SELECT
+				c.cat_id,
+				c.parent_id,
+				c.cat_name
+			FROM
+				`shop_categories` AS p
+			RIGHT JOIN `shop_categories` AS c
+			ON p.cat_id = c.parent_id
+		";
+		$query =  $this->db->query($sql);
+		return $this->getArrayResult($query);
+	}
+
 	/**
 	 * Получить главные категории с привязками дочерних
 	 * 
@@ -9,12 +67,14 @@ class CategoriesModel extends MainModel{
 	 */
 
 	public function getAllMainCatsWithChildren(){
+		// CHANGE THE CHILDREN FUNCTION TO RECURSION(CALL ITSELF INSTEAD getChildrenCategories)
+		// static $recursion = 1;
 		$sql = 
 			"SELECT
 				cat_id,
 				parent_id,
 				cat_name,
-				cat_description
+				cat_url
 			FROM
 				`shop_categories`
 			WHERE
@@ -44,7 +104,7 @@ class CategoriesModel extends MainModel{
 				cat_id,
 				parent_id,
 				cat_name,
-				cat_description
+				cat_url
 			FROM
 				`shop_categories`
 			WHERE

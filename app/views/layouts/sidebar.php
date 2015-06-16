@@ -1,11 +1,11 @@
-<script type="text/javascript" src="<?php echo JS_PATH ?>angular-controllers/sidebar-categories.js"></script>
-	<div class="col-md-3" ng-controller="SidebarCategories">
+	<div class="col-md-3">
 		<p class="lead">Shop Name</p>
+
 		<div class="list-group">
-			<div ng-repeat="category in categories">
-				<a href="{{main.url+main.linkTo + category.cat_id}}" class="list-group-item" target="_self">{{category.cat_name}}</a>
+			<div ng-repeat="category in Factory.getCategories()">
+				<a href="{{main.url+main.linkTo + category.cat_url}}" class="list-group-item" target="_self">{{category.cat_name}}</a>
 				<div ng-repeat="childs in category.children">
-					<a href="{{main.url+main.linkTo + childs.cat_id}}" class="list-group-item" target="_self">--{{childs.cat_name}}</a>
+					<a href="{{main.url+main.linkTo + category.cat_url +'/'+ childs.cat_url}}" class="list-group-item" target="_self">--{{childs.cat_name}}</a>
 				</div>
 			</div>
 		</div>

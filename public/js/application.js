@@ -9,6 +9,93 @@ webstoreApp.config(["$routeProvider", "$locationProvider", function($routeProvid
 	});
 }]);
 
+
+webstoreApp.factory('mainFactory', function($http, $q) {
+	
+	var service = {};
+	var baseUrl = window.location.origin;
+	//_controller is mvc controller
+	var _finalUrl = '';
+	var _categories = {};
+	var _activeCategory = '';
+	var _activeParent = '';
+	var _products = {};
+	var _pathLink = '';
+	var _mininavPath = '';
+	var _mininavPath1 = '';
+
+
+	var makeUrl = function(){
+		_finalUrl = baseUrl// + _controller
+		;
+		return _finalUrl;
+	}
+	service.setPathLink = function(name, url){
+		_pathLink += " / <a href='"+url+"'>"+name+"</a>";
+	}
+	service.getPathLink = function(){
+		return _pathLink;
+	}
+	service.setNavPath = function(links){
+		_mininavPath = links;
+	}
+	service.getNavPath = function(){
+		return _mininavPath;
+	}
+	service.setNavPath1 = function(links){
+		_mininavPath1 = links;
+	}
+	service.getNavPath1 = function(){
+		return _mininavPath1;
+	}
+	service.setActiveCategory = function(category){
+		_activeCategory = category;
+	}
+	service.getActiveCategory = function(){
+		return _activeCategory;
+	}
+	service.setActiveParent = function(category){
+		_activeParent = category;
+	}
+	service.getActiveParent = function(){
+		return _activeParent;
+	}
+	service.setCategories = function(categories){
+		_categories = categories;
+	}
+	service.getCategories = function(){
+		return _categories;
+	}
+	service.setProducts = function(products){
+		_products = products;
+	}
+	service.getProducts = function(){
+		return _products;
+	}
+	service.callData = function(){
+		makeUrl();
+		var deferred = $q.defer();
+		$http.get(_finalUrl)
+		.success(function(data){
+			deferred.resolve(data);
+		}).error(function(){
+			deferred.reject('There was an error');
+		});
+		return deferred.promise;
+	};
+	return service;
+});
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function(){
 	if ($("a.zoom").length > 0) {
 		$("a.zoom").fancybox({

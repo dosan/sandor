@@ -2,40 +2,31 @@
 console.log(window.location);
 
 
-webstoreApp.controller('CategoriesProducts', ['$scope', '$http','$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location) {
+webstoreApp.controller('CategoriesProducts', ['$scope', '$http','$route', '$routeParams', '$location', 'mainFactory', '$window', function($scope, $http, $route, $routeParams, $location, mainFactory, $window) {
 	$scope.main = {
 		title: 'Web Store Categories',
-		categoryId: (window.location.href).split('/').pop(),
 		urlExploded: (window.location.href).split('/'),
 		url: window.location.origin,
-		linkTo: '/category/',
-		getCategories: '/category/getCategories',
-		httpGet: '/category/getCategoriesWithProducts/',
+		linkTo: '/product/category/',
+		getCategories: '/product/getCategories',
 		get: '',
-		categoryIsEmtpy: 'No have products'
+		categoryIsEmtpy: 'No have products', 
+		categories: window.location.pathname.replace("/product/category/", '').replace(/\//g, ' ').trim().split(' '),
+		mainCategory: null,
+		childCategory: null,
 	};
-	if (!isNaN($scope.main.categoryId)) {
-		$scope.main.get = $scope.main.httpGet + $scope.main.categoryId;
-	};
-
-	$scope.setCategory = function(category_id = ''){
-		console.log($scope.main.urlExploded);
-		$scope.main.get = $scope.main.httpGet + category_id;
-		$scope.loadPage();
+	$scope.loadProducts = function(){
+		if (window.location.pathname.search("product/category") == 1/* && ("/product/category/".length < window.location.pathname.length)*/) {
+			$http.get(window.location.href.replace("product/category", "product/getProducts")).success(function(data){
+				mainFactory.setProducts(data);
+				$scope.Products = mainFactory.getProducts();
+			});
+		};
 	}
-	$scope.loadCategories = function(){
-		$http.get($scope.main.getCategories).success(function(data){
-			$scope.categories = data;
-		});
+	$scope.loadPage = function(){
+		console.log($scope.main.categories);
+		$scope.loadProducts();
 	};
-	$scope.loadPage = function() {
-		$http.get($scope.main.get).success(function(data){
-			$scope.categoriesWithProducts = data;
-		});
-	};
-	if ($scope.main.urlExploded[3] == 'category') {
-		$scope.loadPage();
-	};
-	$scope.loadCategories();
+	$scope.loadProducts();
 }]);
 

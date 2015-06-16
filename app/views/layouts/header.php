@@ -11,8 +11,9 @@
 		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular-route.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>fancybox/jquery.fancybox.js"></script>
-		<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>application.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>angular-controllers/main-controller.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -37,4 +38,4 @@
 		</div>
 	</nav>
 	<div class="container">
-	<div class="row" ng-app="webstoreApp">
+	<div class="row" ng-app="webstoreApp" ng-controller="MainController">

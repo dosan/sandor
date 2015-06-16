@@ -14,9 +14,30 @@ class Product extends Controller
 		require(VIEWS_PATH."product".DS."index.php");
 		require(VIEWS_PATH."layouts".DS."footer.php");
 	}
-
+	public function category($parent = null, $category = null){
+		require(VIEWS_PATH."layouts".DS."header.php");
+		require(VIEWS_PATH."layouts".DS."sidebar.php");
+		require(VIEWS_PATH."category".DS."index.php");
+		require(VIEWS_PATH."layouts".DS."footer.php");
+	}
 
 	/**********************GET DATA FROM DATABASE FOR ANGULAR**************************/
+
+
+	public function getProducts($parent = null, $category = null){
+		$products =  $this->categories_model->getProducts($parent, $category);
+		echo json_encode($products);
+	}
+
+	public function navigation(){
+		echo json_encode($this->categories_model->getAllMainCatsWithChildren());
+	}
+
+	public function getProductsByCategory($cat_id, $limit = null){
+		$prudcts_model = $this->model('ProductsModel');
+		$products = $prudcts_model->getProductsByCat($cat_id, $limit);
+		echo json_encode($products);
+	}
 
 
 	public function getData($page = 1, $limit = 9){
