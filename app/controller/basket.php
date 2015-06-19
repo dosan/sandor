@@ -42,10 +42,12 @@ class Basket extends Controller
 		if (!$product_id) return false;
 		if(isset($_SESSION['basket']) && array_search($product_id, $_SESSION['basket']) === false){
 			$_SESSION['basket'][] = $product_id;
+			$resultData = $_SESSION['basket'];
+			$resultData['success'] = true;
+			$resultData['count'] = count($_SESSION['basket']);
 			$resultData['countProducts'] = count($_SESSION['basket']);
-			$resultData['success'] = 1;
 		} else {
-			$resultData['success'] = 0;
+			$resultData['success'] = false;
 		}
 		echo json_encode($resultData);
 	}
@@ -62,11 +64,14 @@ class Basket extends Controller
 		$key = array_search($product_id, $_SESSION['basket']);
 		if ($key !== false) {
 			unset($_SESSION['basket'][$key]);
-			$resultData['success'] = 1;
-			$resultData['countProducts'] = count($_SESSION['basket']); 
+			$resultData = $_SESSION['basket'];
+			$resultData['success'] = true;
+			$resultData['count'] = count($_SESSION['basket']);
+			$resultData['countProducts'] = count($_SESSION['basket']);
 		}else{
-			$resultData['success'] = 0;
+			$resultData['success'] = false;
 		}
+
 		echo json_encode($resultData);
 	}
 
@@ -185,5 +190,13 @@ class Basket extends Controller
 			$resData['message'] = 'Ошибка внесеня данных для заказа № ' . $order_id; 
 		}
 		echo json_encode($resData);
+	}
+
+	/********Get Request for Angular*******/
+	public function getInBasket(){
+		//проверяем корзину
+		$data = isset($_SESSION['basket']) ? $_SESSION['basket'] : array();
+		$data['count'] = count($data);
+		echo json_encode($data);
 	}
 }

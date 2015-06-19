@@ -1,7 +1,9 @@
 'use strict';
 
 console.log(window.location);
-webstoreApp.controller('ProductPagination', ['$scope', '$http', function($scope, $http) {
+webstoreApp.controller('ProductPagination', ['$scope', '$http', 'productModal', function($scope, $http, productModal) {
+	
+	$scope.Modal = productModal;
 	$scope.main = {
 		title: 'Web Store Products',
 		page: 1,

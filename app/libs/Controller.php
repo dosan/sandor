@@ -103,7 +103,7 @@ class Controller
 		return $string;
 		
 	}
-		public function loadViewTemplFolderTemplName($templateFolder, $templateName, $withOutTempl = false){
+	public function loadViewTemplFolderTemplName($templateFolder, $templateName, $withOutTempl = false){
 		if ($withOutTempl == false) {
 			$this->loadTemplate('header');
 			$this->loadTemplate('sidebar');

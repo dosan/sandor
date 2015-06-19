@@ -1,12 +1,28 @@
 'use strict';
 console.log(window.location);
 
+webstoreApp.controller('CategoriesProducts', ['$scope', '$rootScope', '$http','$route', '$routeParams', '$location', '$window', 'mainFactory', 'productModal', function($scope, $rootScope, $http, $route, $routeParams, $location, $window, mainFactory, productModal) {
 
-webstoreApp.controller('CategoriesProducts', ['$scope', '$http','$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location) {
+	$scope.animationsEnabled = true;
+	$scope.Factory = mainFactory;
+	$scope.Modal = productModal;
+
+	/*********** To back button(history)************/
+	$rootScope.$on('$locationChangeSuccess', function() {
+		$rootScope.actualLocation = $location.path();
+	});
+	$rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
+		if($rootScope.actualLocation === newLocation) {
+			$scope.main.get = $scope.main.httpGet + ($window.location.href).split('/').pop();
+			$scope.loadPage();
+		}
+	});
+
+	/********* Webstore categories with products**********/
 	$scope.main = {
 		title: 'Web Store Categories',
-		categoryId: (window.location.href).split('/').pop(),
-		urlExploded: (window.location.href).split('/'),
+		categoryId: ($window.location.href).split('/').pop(),
+		urlExploded: ($window.location.href).split('/'),
 		url: window.location.origin,
 		linkTo: '/category/',
 		getCategories: '/category/getCategories',
@@ -17,17 +33,10 @@ webstoreApp.controller('CategoriesProducts', ['$scope', '$http','$route', '$rout
 	if (!isNaN($scope.main.categoryId)) {
 		$scope.main.get = $scope.main.httpGet + $scope.main.categoryId;
 	};
-
 	$scope.setCategory = function(category_id = ''){
-		console.log($scope.main.urlExploded);
 		$scope.main.get = $scope.main.httpGet + category_id;
 		$scope.loadPage();
 	}
-	$scope.loadCategories = function(){
-		$http.get($scope.main.getCategories).success(function(data){
-			$scope.categories = data;
-		});
-	};
 	$scope.loadPage = function() {
 		$http.get($scope.main.get).success(function(data){
 			$scope.categoriesWithProducts = data;
@@ -36,6 +45,4 @@ webstoreApp.controller('CategoriesProducts', ['$scope', '$http','$route', '$rout
 	if ($scope.main.urlExploded[3] == 'category') {
 		$scope.loadPage();
 	};
-	$scope.loadCategories();
 }]);
-

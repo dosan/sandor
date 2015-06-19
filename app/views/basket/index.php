@@ -7,24 +7,12 @@
 	<div class="table-responsive">
 	<table class="table table-striped">
 		<tr>
-			<td>
-				№
-			</td>
-			<td>
-				Наименование
-			</td>
-			<td>  
-			   Количество
-			</td>
-			<td>  
-			   Цена за еденицу
-			</td>
-			<td>
-			   Цена
-			</td>
-			<td>
-				Действие
-			</td>
+			<td>№</td>
+			<td>Наименование</td>
+			<td>Количество</td>
+			<td>Цена за еденицу</td>
+			<td>Цена</td>
+			<td>Действие</td>
 		</tr>
 	<?php
 	$i = 1;

@@ -19,7 +19,6 @@
 		<?php endif ?>
 	onClick="addToBasket(<?php echo $this->product['product_id']?>); return false;" href="#" alt="add to basket">Дабавить корзину</a>
 </p>
-
 	<p><h2>Description</h2> <br> <?php echo $this->product['product_description'] ?></p>
 	</div>
 </div>

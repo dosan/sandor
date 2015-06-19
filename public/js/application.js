@@ -1,6 +1,5 @@
 var webstoreApp = angular.module('webstoreApp', ['ui.bootstrap', 'ngRoute']);
 
-
 webstoreApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider)
 {
 	$locationProvider.html5Mode({
@@ -8,6 +7,69 @@ webstoreApp.config(["$routeProvider", "$locationProvider", function($routeProvid
 		requireBase: false
 	});
 }]);
+webstoreApp.factory('mainFactory', function($http, $q) {
+	var service = {};
+	var _categories = {};
+	var _product;
+	var _inBasket = {};
+
+	service.setProduct = function(id){
+		$http.get('/product/getProduct/'+ id).success(function(data){
+			_product = data;
+		});
+	}
+	service.getINbasketHttp = function(){
+		$http.get('/basket/getInBasket/').success(function(data){
+			_inBasket = data;
+		});
+	}
+	service.getProduct = function(){
+		return _product;
+	}
+	service.setCategories = function(categories){
+		_categories = categories;
+	}
+	service.getCategories = function(){
+		return _categories;
+	}
+	service.setInBasket = function(data){
+		_inBasket = data;
+	}
+	service.getInBasket = function(){
+		return _inBasket;
+	}
+	service.getINbasketHttp();
+	return service;
+});
+webstoreApp.factory('productModal', function($http, $q, $log, $modal) {
+	var service = {};
+	var _animationsEnabled = true;
+	service.getAnimation = function(){
+		return _animationsEnabled;
+	}
+	service.open = function(product){
+		var modalInstance = $modal.open({
+			animation: _animationsEnabled,
+			templateUrl: '/app/views/modal/modal-product.html',
+			controller: 'ModalInstanceCtrl',
+			resolve: {
+				product: function () {
+					return product;
+				}
+			}
+		});
+		modalInstance.result.then(function (selectedItem) {
+			_selected = selectedItem;
+		}, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
+	service.toggleAnimation = function () {
+		_animationsEnabled = !_animationsEnabled;
+	};
+	return service;
+});
 
 $(document).ready(function(){
 	if ($("a.zoom").length > 0) {

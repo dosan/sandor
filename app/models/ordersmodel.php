@@ -19,7 +19,7 @@ class OrdersModel extends MainModel{
 	function makeNewOrder($user_name, $user_phone, $user_adress)
 	{
 		//> инициализация переменных
-		$user_id = $this->getSession('user_id');
+		$user_id = Session::get('user_id');
 		$comment	=	"id пользователя:  {$user_id} <br />
 						Имя: {$user_name} <br />
 						Тел: {$user_phone} <br />

@@ -38,4 +38,8 @@ class Product extends Controller
 		$this->product = $product_model->getProductById($product_id);
 		$this->loadViewTemplFolderTemplName('product','getid.php');
 	}
+	public function getProduct($id){
+		$model = $this->model('ProductsModel');
+		echo json_encode($model->getProductById($id));
+	}
 }

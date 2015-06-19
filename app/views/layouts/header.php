@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact secure</title>
+	<title>Web Store simple site</title>
 	<base href="">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS_PATH ?>core.css" type="text/css">
@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>angular/angular-route.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>fancybox/jquery.fancybox.js"></script>
-		<script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
 		<script type="text/javascript" src="<?php echo JS_PATH ?>application.js"></script>
 </head>
 <body>

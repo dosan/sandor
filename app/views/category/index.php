@@ -1,6 +1,9 @@
 	<div class="col-md-9">
 		<script type="text/javascript" src="<?php echo JS_PATH ?>angular-controllers/categories-products.js"></script>
+		<script type="text/javascript" src="<?php echo JS_PATH ?>angular-controllers/modal-product.js"></script>
+
 		<div class="row" ng-controller="CategoriesProducts">
+			<button class="btn btn-default" ng-click="Modal.toggleAnimation()">Toggle Animation ({{ Modal.getAnimation() }})</button>
 			<h1> {{main.title}} </h1>
 			<div>
 				<div ng-repeat="category in categoriesWithProducts">
@@ -17,7 +20,7 @@
 							<img style="max-height: 150px; height: 150px;" ng-src="{{main.url+'/public/img/no-image.png'}}" alt="Product">
 							<span class="label-success">{{product.product_price}}tg</span>
 							<div class="caption">
-								<h4><a href="/product/{{product.product_id}}/" target="_self">{{product.product_name}}</a></h4>
+								<h4><a href="" ng-click="Modal.open(product)">{{product.product_name}}</a></h4>
 								<p>{{product.product_description}}</p>
 							</div>
 						</div>
