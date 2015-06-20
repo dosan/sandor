@@ -4,7 +4,7 @@
 
 		<div class="row" ng-controller="CategoriesProducts">
 			<button class="btn btn-default" ng-click="Modal.toggleAnimation()">Toggle Animation ({{ Modal.getAnimation() }})</button>
-			<h1> {{main.title}} </h1>
+			<h1> Categories with last 3 products </h1>
 			<div>
 				<div ng-repeat="category in categoriesWithProducts">
 					<div class="col-md-9">
@@ -17,7 +17,7 @@
 					</div>
 					<div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in category.products">
 						<div class="thumbnail">
-							<img style="max-height: 150px; height: 150px;" ng-src="{{main.url+'/public/img/no-image.png'}}" alt="Product">
+							<img style="max-height: 150px; height: 150px;" ng-src="{{main.url+'/public/img/'+ product.porduct_image}}" alt="Product">
 							<span class="label-success">{{product.product_price}}tg</span>
 							<div class="caption">
 								<h4><a href="" ng-click="Modal.open(product)">{{product.product_name}}</a></h4>

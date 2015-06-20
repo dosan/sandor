@@ -5,7 +5,6 @@ webstoreApp.controller('ProductPagination', ['$scope', '$http', 'productModal', 
 	
 	$scope.Modal = productModal;
 	$scope.main = {
-		title: 'Web Store Products',
 		page: 1,
 		limit: 6,
 		pages: 1,

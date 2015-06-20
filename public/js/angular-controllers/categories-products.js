@@ -20,7 +20,6 @@ webstoreApp.controller('CategoriesProducts', ['$scope', '$rootScope', '$http','$
 
 	/********* Webstore categories with products**********/
 	$scope.main = {
-		title: 'Web Store Categories',
 		categoryId: ($window.location.href).split('/').pop(),
 		urlExploded: ($window.location.href).split('/'),
 		url: window.location.origin,

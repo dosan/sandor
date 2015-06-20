@@ -2,7 +2,7 @@
 	<div class="jumbotron">
 	<h1><?php echo $this->product['product_name'] ?> </h1>
 	<p class="lead">
-	<img width="500" src="<?php echo URL."public/img/products/".$this->product['product_image'] ?>"/>
+	<img width="500" src="<?php echo URL."public/img/".$this->product['product_image'] ?>"/>
 	</p>
 	Price: <?php echo $this->product['product_price'] ?>
 <p>

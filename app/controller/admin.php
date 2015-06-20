@@ -137,7 +137,6 @@ class Admin extends Controller
 			// получаем расширение загружаемого файла
 			$ext = pathinfo($_FILES['filename']['name'], PATHINFO_EXTENSION);
 			$newFileName = $itemId . '.'. $ext;
-
 			if ($_FILES['filename']['size'] > $maxSize) {
 				echo ('Размер файла превышает два мегобайта');
 				return;
@@ -145,8 +144,7 @@ class Admin extends Controller
 			// Загружен ли файл
 			if (is_uploaded_file($_FILES['filename']['tmp_name'])) {
 				// Если файл загружен то перемещаем его из временной директорий в конечную
-
-				$res = move_uploaded_file($_FILES['filename']['tmp_name'], DOCUMENT_ROOT . 'public/img/products/' . $newFileName);
+				$res = move_uploaded_file($_FILES['filename']['tmp_name'], DOCUMENT_ROOT . 'public/img/' . $newFileName);
 				if ($res) {
 					$products_model = $this->model('ProductsModel');
 					$res = $products_model->updateProductImage($itemId, $newFileName);

@@ -50,7 +50,7 @@ productApp.controller('PhoneDetailCtrl', ['$scope', '$http', '$location', '$rout
 	$scope.phoneId = $routeParams.phoneId;
 	var url = 'phones/get/' + $routeParams.phoneId;
 	$http.get(url).success(function(data){
-		$scope.mainImageUrl = 'public/img/products/'+ data[0].product_image;
+		$scope.mainImageUrl = 'public/img/'+ data[0].product_image;
 		$scope.phone = data[0];
 	});
 	$scope.setImage = function(imageUrl){

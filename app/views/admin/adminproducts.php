@@ -87,7 +87,7 @@
 				</td>
 				<td>
 					<?php if ($item['product_image']): ?>
-						<img src="<?php echo URL."public/img/products/" . $item['product_image']?> " width="100">
+						<img src="<?php echo URL."public/img/" . $item['product_image']?> " width="100">
 					<?php endif ?>
 					<form action="<?php echo URL ?>admin/upload/" method="post" enctype="multipart/form-data">
 						<input type="file" name="filename"><br>
