@@ -88,7 +88,7 @@ class CategoriesModel extends MainModel{
 	* @return array categories
 	*/
 	public function getAllCategories(){
-			$sql = "SELECT cat_name, cat_id
+			$sql = "SELECT cat_name, cat_id, parent_id
 			FROM shop_categories
 			ORDER BY parent_id ASC";
 

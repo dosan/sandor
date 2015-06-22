@@ -8,7 +8,7 @@
 			<div>
 				<div ng-repeat="category in categoriesWithProducts">
 					<div class="col-md-9">
-						<a href="{{main.linkTo}}" ng-click="setCategory()">Categories</a> > 
+						<a href="{{main.linkTo}}" ng-click="setCategory('')">Categories</a> > 
 						<a href="{{main.linkTo+category.parent_id}}" ng-click="setCategory(category.parent_id)">{{category.parent_cat_name}}</a> > 
 						<a href="{{main.linkTo+category.cat_id}}" ng-click="setCategory(category.cat_id)">{{category.cat_name}}</a>
 					</div>
@@ -17,7 +17,7 @@
 					</div>
 					<div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in category.products">
 						<div class="thumbnail">
-							<img style="max-height: 150px; height: 150px;" ng-src="{{main.url+'/public/img/'+ product.porduct_image}}" alt="Product">
+							<img style="max-height: 150px; height: 150px;" ng-src="/public/img/{{product.product_image}}" alt="Product">
 							<span class="label-success">{{product.product_price}}tg</span>
 							<div class="caption">
 								<h4><a href="" ng-click="Modal.open(product)">{{product.product_name}}</a></h4>

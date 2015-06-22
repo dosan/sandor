@@ -50,7 +50,7 @@ webstoreApp.factory('productModal', function($http, $q, $log, $modal) {
 	service.open = function(product){
 		var modalInstance = $modal.open({
 			animation: _animationsEnabled,
-			templateUrl: '/app/views/modal/modal-product.html',
+			templateUrl: '/app/views/modal/modal-product.php',
 			controller: 'ModalInstanceCtrl',
 			resolve: {
 				product: function () {

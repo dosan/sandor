@@ -32,7 +32,7 @@ webstoreApp.controller('CategoriesProducts', ['$scope', '$rootScope', '$http','$
 	if (!isNaN($scope.main.categoryId)) {
 		$scope.main.get = $scope.main.httpGet + $scope.main.categoryId;
 	};
-	$scope.setCategory = function(category_id = ''){
+	$scope.setCategory = function(category_id){
 		$scope.main.get = $scope.main.httpGet + category_id;
 		$scope.loadPage();
 	}
